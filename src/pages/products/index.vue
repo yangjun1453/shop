@@ -1,5 +1,5 @@
 <template>
-    <div class="flex gap-10 justify-between mt-20 ">
+    <div class="flex gap-10 justify-between lg:justify-evenly mt-20 ">
 
         <div class="text-xl max-w-[320px]">
             <Collapse :categories="categories" />
@@ -71,34 +71,9 @@
 
             </div>
 
-            <div class="grid grid-cols-3">
-                <div class="w-70 ">
-                    <img src="/img/untldshots-3yqupLRBdkE-unsplash.jpg" alt=" " class="w-full h-90 object-cover ">
-                    <p>Cotton T Shirt</p>
-                    <div class="flex justify-between">
-                        <p>Basic Slim Fit T-shirt</p>
-                        <p>$199</p>
-                    </div>
+            <div class="grid grid-cols-3 mt-5">
+                <ProductCard v-for="product in products" :key="product.id" :product="product" />
 
-                </div>
-                <div class="w-70">
-                    <img src="/img/untldshots-3yqupLRBdkE-unsplash.jpg" alt=" " class="w-full h-90 object-cover ">
-                    <p>Cotton T Shirt</p>
-                    <div class="flex justify-between">
-                        <p>Basic Slim Fit T-shirt</p>
-                        <p>$199</p>
-                    </div>
-
-                </div>
-                <div class="w-70">
-                    <img src="/img/untldshots-3yqupLRBdkE-unsplash.jpg" alt=" " class="w-full h-90 object-cover ">
-                    <p>Cotton T Shirt</p>
-                    <div class="flex justify-between">
-                        <p>Basic Slim Fit T-shirt</p>
-                        <p>$199</p>
-                    </div>
-
-                </div>
 
             </div>
         </div>
@@ -106,8 +81,16 @@
 </template>
 
 <script setup>
+import ProductCard from '../../components/ProductCard.vue';
 import Collapse from '../../components/Collapse.vue';
-
+import { supabase } from '../../lib/supabaseClient'
+import { onMounted } from 'vue';
+import { ref } from 'vue';
+const products = ref([])
+async function getProducts() {
+    const { data } = await supabase.from('products').select()
+    products.value = data
+}
 const categories = [
     {
         title: 'Size',
@@ -150,6 +133,10 @@ const categories = [
         options: ['5 Stars', '4 Stars & Up', '3 Stars & Up', '2 Stars & Up', '1 Star & Up']
     }
 ]
+
+onMounted(() => {
+    getProducts()
+})
 </script>
 
 <style scoped></style>

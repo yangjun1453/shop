@@ -10,6 +10,13 @@ const routes = [
         path: "/products",
         component: () => import("../pages/products/index.vue"),
       },
+
+      {
+        path: "/products/:id",
+        name: "ProductDetail",
+        component: () => import("../pages/products/ProductDetail.vue"),
+        props: true, // 可选：将 params 作为 props 传入组件
+      },
       {
         path: "/demo",
         component: () => import("../pages/demo/index.vue"),
