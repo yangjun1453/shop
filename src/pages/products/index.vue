@@ -1,0 +1,155 @@
+<template>
+    <div class="flex gap-10 justify-between mt-20 ">
+
+        <div class="text-xl max-w-[320px]">
+            <Collapse :categories="categories" />
+        </div>
+        <!-- 右边内容 -->
+        <div class="mr-2">
+            <div>
+                <nav aria-label="breadcrumb" class=" text-gray-800">
+                    <ol class="flex h-8 space-x-2 text-gray-800">
+                        <li class="flex items-center">
+                            <a rel="noopener noreferrer" href="#" title="Back to homepage"
+                                class="flex items-center hover:underline">Home</a>
+                        </li>
+                        <li class="flex items-center space-x-1">
+                            <span class="text-gray-600">/</span>
+                            <a rel="noopener noreferrer" href="#"
+                                class="flex items-center px-1 capitalize hover:underline">Parent</a>
+                        </li>
+                        <li class="flex items-center space-x-1">
+                            <span class="text-gray-600">/</span>
+                            <a rel="noopener noreferrer" href="#"
+                                class="flex items-center px-1 capitalize hover:underline">Parent</a>
+                        </li>
+                        <li class="flex items-center space-x-1">
+                            <span class="text-gray-600">/</span>
+                            <a rel="noopener noreferrer" href="#"
+                                class="flex items-center px-1 capitalize hover:no-underline cursor-default">Current</a>
+                        </li>
+                    </ol>
+                </nav>
+            </div>
+            <p> Products </p>
+
+            <div class="flex">
+
+                <div>
+                    <fieldset class="w-full space-y-1 text-gray-800">
+                        <label for="Search" class="hidden">Search</label>
+                        <div class="relative">
+                            <span class="absolute inset-y-0 left-0 flex items-center pl-2">
+                                <button type="button" title="search" class="p-1 focus:outline-none focus:ring">
+                                    <svg fill="currentColor" viewBox="0 0 512 512" class="w-4 h-4 text-gray-800">
+                                        <path
+                                            d="M479.6,399.716l-81.084-81.084-62.368-25.767A175.014,175.014,0,0,0,368,192c0-97.047-78.953-176-176-176S16,94.953,16,192,94.953,368,192,368a175.034,175.034,0,0,0,101.619-32.377l25.7,62.2L400.4,478.911a56,56,0,1,0,79.2-79.195ZM48,192c0-79.4,64.6-144,144-144s144,64.6,144,144S271.4,336,192,336,48,271.4,48,192ZM456.971,456.284a24.028,24.028,0,0,1-33.942,0l-76.572-76.572-23.894-57.835L380.4,345.771l76.573,76.572A24.028,24.028,0,0,1,456.971,456.284Z">
+                                        </path>
+                                    </svg>
+                                </button>
+                            </span>
+                            <input type="search" name="Search" placeholder="Search..."
+                                class="w-32 py-2 pl-10 text-sm rounded-md sm:w-auto focus:outline-none bg-gray-100 text-gray-800 focus:bg-gray-50 focus:border-emerald-600">
+                        </div>
+                    </fieldset>
+                </div>
+                <div class="grid grid-cols-5 text-center gap-2">
+                    <p class="border px-2">NEW</p>
+                    <p class="border px-2">SHIRTs</p>
+                    <p class="border px-2">POLO SHIRTS</p>
+                    <p class="border px-2">T-SHIRTS</p>
+                    <p class="border px-2">JUMPSUITS</p>
+                    <p class="border px-2">JACKETs</p>
+                    <p class="border px-2">JUMPSUITS</p>
+                    <p class="border    px-2">JACKETs</p>
+                    <p class="border px-2">NEW</p>
+                    <p class="border px-2">SHIRTs</p>
+
+
+
+                </div>
+
+            </div>
+
+            <div class="grid grid-cols-3">
+                <div class="w-70 ">
+                    <img src="/img/untldshots-3yqupLRBdkE-unsplash.jpg" alt=" " class="w-full h-90 object-cover ">
+                    <p>Cotton T Shirt</p>
+                    <div class="flex justify-between">
+                        <p>Basic Slim Fit T-shirt</p>
+                        <p>$199</p>
+                    </div>
+
+                </div>
+                <div class="w-70">
+                    <img src="/img/untldshots-3yqupLRBdkE-unsplash.jpg" alt=" " class="w-full h-90 object-cover ">
+                    <p>Cotton T Shirt</p>
+                    <div class="flex justify-between">
+                        <p>Basic Slim Fit T-shirt</p>
+                        <p>$199</p>
+                    </div>
+
+                </div>
+                <div class="w-70">
+                    <img src="/img/untldshots-3yqupLRBdkE-unsplash.jpg" alt=" " class="w-full h-90 object-cover ">
+                    <p>Cotton T Shirt</p>
+                    <div class="flex justify-between">
+                        <p>Basic Slim Fit T-shirt</p>
+                        <p>$199</p>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</template>
+
+<script setup>
+import Collapse from '../../components/Collapse.vue';
+
+const categories = [
+    {
+        title: 'Size',
+        type: 'buttons',
+        options: ['XS', 'S', 'M', 'L', 'XL', 'XXL']
+    },
+    {
+        title: 'Availability',
+        type: 'checkboxes',
+        options: ['In Stock', 'Pre-order', 'Out of Stock']
+    },
+    {
+        title: 'Category',
+        type: 'checkboxes',
+        options: ['T-Shirts', 'Jeans', 'Dresses', 'Shoes', 'Accessories', 'Jackets', 'Sweaters']
+    },
+    {
+        title: 'Colors',
+        type: 'color-picker',
+        options: ['Black', 'White', 'Red', 'Blue', 'Green', 'Yellow', 'Pink', 'Purple', 'Gray', 'Brown']
+    },
+    {
+        title: 'Price Range',
+        type: 'range-slider',
+        options: { min: 0, max: 500, step: 10, currency: '$' }
+    },
+    {
+        title: 'Collections',
+        type: 'checkboxes',
+        options: ['Summer 2024', 'Winter Collection', 'Casual Wear', 'Formal Wear', 'Sports', 'Limited Edition']
+    },
+    {
+        title: 'Tags',
+        type: 'checkboxes',
+        options: ['New Arrival', 'Best Seller', 'On Sale', 'Trending', 'Eco-Friendly', 'Premium Quality']
+    },
+    {
+        title: 'Ratings',
+        type: 'star-rating',
+        options: ['5 Stars', '4 Stars & Up', '3 Stars & Up', '2 Stars & Up', '1 Star & Up']
+    }
+]
+</script>
+
+<style scoped></style>

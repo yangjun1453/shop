@@ -1,0 +1,14 @@
+@import "tailwindcss";
+@plugin "daisyui";
+html,body{
+    height: 100%;
+}
+
+#app {
+  height: 100%;
+}
+
+* {
+  box-sizing: border-box;
+  font-family: "Roboto Mono","Source Sans 3";
+}
