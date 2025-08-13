@@ -1,6 +1,6 @@
 <template>
     <!-- Responsive top margin: smaller on mobile, scales up to 61px at xl (1280px) -->
-    <div class="flex justify-between items-center mt-5 text-xl">
+    <div class="flex justify-between items-center pt-5 text-xl">
         <div>
             <ul class="flex space-x-8">
                 <RouterLink to="/">Home</RouterLink>
