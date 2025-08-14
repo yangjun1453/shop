@@ -1,9 +1,10 @@
 <template>
-    <RouterLink :to="{ name: 'ProductDetail', params: { id: product.id } }" class="h-full">
+    <RouterLink :to="{ name: 'ProductDetail', params: { id: product.id } }" class="h-full block  w-full">
 
-        <div class="card bg-base-100 w-70 shadow-sm card-lg h-full">
-            <figure>
-                <img :src="product.images?.[0]" alt="Shoes" class="w-full h-98 object-cover" />
+        <div class="card bg-base-100  shadow-sm  md:card-md  card-sm h-full">
+            <figure class="aspect-[4/5] w-full">
+                <img :src="product.images?.[0]" alt="Shoes" class="w-full h-full object-cover" loading="lazy"
+                    decoding="async" />
             </figure>
             <div class="card-body">
                 <h2 class="card-title">

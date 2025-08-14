@@ -1,5 +1,5 @@
 <template>
-    <div class=" w-3/4 h-full mx-auto">
+    <div class=" lg:w-4/5 w-full h-full mx-auto p-2">
         <Header />
 
 

@@ -1,11 +1,11 @@
 <template>
-  <div class="flex gap-10 justify-between lg:justify-evenly mt-20 ">
+  <div class="flex gap-10  justify-between  mt-20 ">
 
-    <div class="text-xl max-w-[320px]">
+    <div class="text-xl flex-1  ">
       <Collapse :categories="categories" v-model:selectedFilters="selectedFilters" />
     </div>
     <!-- 右边内容 -->
-    <div class="mr-2 ">
+    <div class="mr-2 flex-3">
       <div>
         <nav aria-label="breadcrumb" class=" text-gray-800">
           <ol class="flex h-8 space-x-2 text-gray-800">
@@ -68,7 +68,8 @@
 
       </div>
 
-      <div class="grid lg:grid-cols-3 mt-5 gap-4 md:grid-cols-2">
+      <div
+        class="grid lg:grid-cols-3 md:grid-cols-2  grid-cols-1 lg:justify-items-center gap-5 max-h-[70vh] overflow-y-auto pr-2 mt-5">
         <ProductCard v-for="product in filteredProducts" :key="product.id" :product="product" />
 
 
