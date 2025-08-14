@@ -12,15 +12,19 @@
             <div class="overflow-hidden pt-2">
                 <!-- Buttons type (Size) -->
                 <div v-if="category.type === 'buttons'" class="flex flex-wrap gap-2">
-                    <button v-for="option in category.options" :key="option"
-                        class="px-3 py-1 border border-gray-300 rounded hover:bg-gray-100">
+                    <button v-for="option in category.options" :key="option" class="btn"
+                        :class="(selectedFilters[category.key] || []).includes(option) ? 'btn-active' : ''"
+                        @click="onButtonChange({ key: category.key, option: option })">
+
                         {{ option }}
                     </button>
                 </div>
 
                 <!-- Checkboxes type (Availability, Category, Collections, Tags) -->
                 <div v-else-if="category.type === 'checkboxes'" class="space-y-2">
-                    <Checkbox v-for="option in category.options" :key="option" :option="option" />
+                    <Checkbox v-for="option in category.options" :key="option" :option="option"
+                        :filterKey="category.key" :checked="(selectedFilters[category.key] || []).includes(option)"
+                        @change="onCheckboxChange" />
                 </div>
 
                 <!-- Color picker type (Colors) -->
@@ -36,8 +40,7 @@
                         <span>{{ category.options.currency }}{{ category.options.min }}</span>
                         <span>{{ category.options.currency }}{{ category.options.max }}</span>
                     </div>
-                    <input type="range" :min="category.options.min" :max="category.options.max"
-                        :step="category.options.step" class="w-full" />
+                    <input type="range" min="0" max="100" value="40" class="range range-primary" />
                 </div>
 
                 <!-- Star rating type (Ratings) -->
@@ -65,7 +68,13 @@ import { ref } from 'vue';
 import Checkbox from './Checkbox.vue';
 import { PhCaretRight } from '@phosphor-icons/vue';
 const openIndexes = ref([])
-defineProps(['categories'])
+
+const props = defineProps({
+    categories: { type: Array, required: true },
+    selectedFilters: { type: Object, required: true }
+})
+
+const emit = defineEmits(['update:selectedFilters'])
 
 const toggle = (index) => {
     if (openIndexes.value.includes(index)) {
@@ -90,6 +99,24 @@ const getColorClass = (color) => {
     }
     return colorMap[color] || 'bg-gray-300'
 }
+const onCheckboxChange = ({ key, option }) => {
+
+    const current = props.selectedFilters[key] || [] // 数组
+    const updated = current.includes(option)
+        ? current.filter(o => o !== option) // 数组过滤
+        : [...current, option] // 数组添加
+    emit('update:selectedFilters', { ...props.selectedFilters, [key]: updated })
+}
+const onButtonChange = ({ key, option }) => {
+    console.log(key, option);
+    const current = props.selectedFilters[key] || [] // 数组
+    const updated = current.includes(option)
+        ? current.filter(o => o !== option) // 数组过滤
+        : [...current, option] // 数组添加
+    emit('update:selectedFilters', { ...props.selectedFilters, [key]: updated })
+
+}
+
 </script>
 
 <style scoped></style>
