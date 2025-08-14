@@ -2,7 +2,8 @@
 @plugin "daisyui";
 html,body{
     height: 100%;
-    /* scrollbar-gutter: stable; */
+    scrollbar-gutter: stable;
+    
 }
 
 #app {

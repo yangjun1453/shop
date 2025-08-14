@@ -5,7 +5,7 @@
       <Collapse :categories="categories" v-model:selectedFilters="selectedFilters" />
     </div>
     <!-- 右边内容 -->
-    <div class="mr-2">
+    <div class="mr-2 ">
       <div>
         <nav aria-label="breadcrumb" class=" text-gray-800">
           <ol class="flex h-8 space-x-2 text-gray-800">
@@ -68,7 +68,7 @@
 
       </div>
 
-      <div class="grid grid-cols-3 mt-5 gap-4">
+      <div class="grid lg:grid-cols-3 mt-5 gap-4 md:grid-cols-2">
         <ProductCard v-for="product in filteredProducts" :key="product.id" :product="product" />
 
 
