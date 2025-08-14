@@ -69,7 +69,7 @@
       </div>
 
       <div
-        class="grid lg:grid-cols-3 md:grid-cols-2  grid-cols-1 lg:justify-items-center gap-5 max-h-[70vh] overflow-y-auto pr-2 mt-5">
+        class="grid lg:grid-cols-3 md:grid-cols-2  grid-cols-1 lg:justify-items-center gap-5 max-h-[70vh] overflow-y-auto pr-2 mt-5 pb-2 ">
         <ProductCard v-for="product in filteredProducts" :key="product.id" :product="product" />
 
 
