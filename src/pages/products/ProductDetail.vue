@@ -1,8 +1,12 @@
 <template>
     <div class="flex mt-20 gap-10    justify-center items-center" v-if="product">
         <!-- 图片区域 -->
-        <div>
-            <img :src="product.images?.[0]" class="w-100  object-cover" alt="">
+        <div class="flex gap-2">
+            <img :src="product.images[bigPhotoIndex]" class="w-100  object-cover" alt="">
+            <div class="flex flex-col w-20 "><img v-for="(img, index) in product.images.slice(1)" :src="img"
+                    :key="index" class="w-100  flex-1 object-cover" alt="" @click="checkPhoto(index + 1)">
+            </div>
+
         </div>
 
         <!-- 详情信息 -->
@@ -12,7 +16,7 @@
             <p>${{ product.price }}</p>
             <div class="flex gap-2">
                 <button v-for="size in product.size" class="btn btn-xs sm:btn-sm  md:btn-md lg:btn-lg xl:btn-xl">{{ size
-                    }}</button>
+                }}</button>
             </div>
 
             <div class="flex gap-2">
@@ -29,6 +33,7 @@
 
                 </div>
             </div>
+            <button class="btn  btn-primary">Add</button>
         </div>
 
     </div>
@@ -59,4 +64,9 @@ const stars = Array.from({ length: 10 }, (_, i) => ({
     value: (i + 1) * 0.5,
     half: (i + 1) % 2 !== 0 // 奇数是半星
 }))
+
+const bigPhotoIndex = ref(0)
+const checkPhoto = (v) => {
+    bigPhotoIndex.value = v
+}
 </script>

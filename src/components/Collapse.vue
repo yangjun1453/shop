@@ -14,7 +14,7 @@
                 <div v-if="category.type === 'buttons'" class="flex flex-wrap gap-2">
                     <button v-for="option in category.options" :key="option" class="btn"
                         :class="(selectedFilters[category.key] || []).includes(option) ? 'btn-active' : ''"
-                        @click="onButtonChange({ key: category.key, option: option })">
+                        @click="updateSelectedFilters({ key: category.key, option: option })">
 
                         {{ option }}
                     </button>
@@ -24,14 +24,19 @@
                 <div v-else-if="category.type === 'checkboxes'" class="space-y-2">
                     <Checkbox v-for="option in category.options" :key="option" :option="option"
                         :filterKey="category.key" :checked="(selectedFilters[category.key] || []).includes(option)"
-                        @change="onCheckboxChange" />
+                        @change="updateSelectedFilters" />
                 </div>
 
                 <!-- Color picker type (Colors) -->
                 <div v-else-if="category.type === 'color-picker'" class="flex flex-wrap gap-2">
                     <div v-for="color in category.options" :key="color"
-                        class="w-8 h-8 rounded-full border-2 border-gray-300 cursor-pointer hover:border-gray-500"
-                        :class="getColorClass(color)" :title="color"></div>
+                        @click="updateSelectedFilters({ key: category.key, option: color })"
+                        class="w-8 h-8 rounded-full border-2  cursor-pointer hover:border-gray-500" :class="[
+                            getColorClass(color),
+                            (selectedFilters[category.key] || []).includes(color)
+                                ? 'border-4 border-gray-300 scale-110'
+                                : ' border-gray-300'
+                        ]" :title="color"></div>
                 </div>
 
                 <!-- Range slider type (Price Range) -->
@@ -40,7 +45,9 @@
                         <span>{{ category.options.currency }}{{ category.options.min }}</span>
                         <span>{{ category.options.currency }}{{ category.options.max }}</span>
                     </div>
-                    <input type="range" min="0" max="100" value="40" class="range range-primary" />
+                    <input type="range" min="0" :max="category.options.max" value="40" class="range range-primary"
+                        @input="updateMaxPrice($event.target.value)" />
+                    <span class="text-sm">{{ selectedFilters.price }}</span>
                 </div>
 
                 <!-- Star rating type (Ratings) -->
@@ -86,37 +93,33 @@ const toggle = (index) => {
 
 const getColorClass = (color) => {
     const colorMap = {
-        'Black': 'bg-black',
-        'White': 'bg-white',
-        'Red': 'bg-red-500',
-        'Blue': 'bg-blue-500',
-        'Green': 'bg-green-500',
-        'Yellow': 'bg-yellow-500',
-        'Pink': 'bg-pink-500',
-        'Purple': 'bg-purple-500',
-        'Gray': 'bg-gray-500',
-        'Brown': 'bg-amber-700'
+        'black': 'bg-black',
+        'white': 'bg-white',
+        'red': 'bg-red-500',
+        'blue': 'bg-blue-500',
+        'green': 'bg-green-500',
+        'yellow': 'bg-yellow-500',
+        'pink': 'bg-pink-500',
+        'purple': 'bg-purple-500',
+        'gray': 'bg-gray-500',
+        'brown': 'bg-amber-700'
     }
     return colorMap[color] || 'bg-gray-300'
 }
-const onCheckboxChange = ({ key, option }) => {
-
-    const current = props.selectedFilters[key] || [] // 数组
-    const updated = current.includes(option)
-        ? current.filter(o => o !== option) // 数组过滤
-        : [...current, option] // 数组添加
-    emit('update:selectedFilters', { ...props.selectedFilters, [key]: updated })
-}
-const onButtonChange = ({ key, option }) => {
+const updateSelectedFilters = ({ key, option }) => {
     console.log(key, option);
-    const current = props.selectedFilters[key] || [] // 数组
+    const current = props.selectedFilters[key] || [];
     const updated = current.includes(option)
-        ? current.filter(o => o !== option) // 数组过滤
-        : [...current, option] // 数组添加
-    emit('update:selectedFilters', { ...props.selectedFilters, [key]: updated })
-
+        ? current.filter(o => o !== option)
+        : [...current, option];
+    emit('update:selectedFilters', { ...props.selectedFilters, [key]: updated });
 }
-
+const updateMaxPrice = (value) => {
+    emit('update:selectedFilters', {
+        ...props.selectedFilters, "price": value
+    })
+    console.log(props.selectedFilters);
+}
 </script>
 
 <style scoped></style>

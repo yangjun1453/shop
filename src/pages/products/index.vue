@@ -1,7 +1,7 @@
 <template>
   <div class="flex gap-10  justify-between  mt-20 ">
 
-    <div class="text-xl flex-1  ">
+    <div class="text-xl flex-1 p-1 ">
       <Collapse :categories="categories" v-model:selectedFilters="selectedFilters" />
     </div>
     <!-- 右边内容 -->
@@ -68,11 +68,14 @@
 
       </div>
 
-      <div
-        class="grid lg:grid-cols-3 md:grid-cols-2  grid-cols-1 lg:justify-items-center gap-5 max-h-[70vh] overflow-y-auto pr-2 mt-5 pb-2 ">
+      <div v-if="products.length" class="grid lg:grid-cols-3 md:grid-cols-2  grid-cols-1 lg:justify-items-center gap-5 max-h-[70vh] overflow-y-auto pr-2 mt-5 pb-2 
+        ">
         <ProductCard v-for="product in filteredProducts" :key="product.id" :product="product" />
 
 
+      </div>
+      <div v-else>
+        <span class="loading loading-spinner loading-xl"></span>
       </div>
     </div>
   </div>
@@ -114,7 +117,7 @@ const categories = [
     key: 'colors',
     title: 'Colors',
     type: 'color-picker',
-    options: ['Black', 'White', 'Red', 'Blue', 'Green', 'Yellow', 'Pink', 'Purple', 'Gray', 'Brown']
+    options: ['black', 'white', 'red', 'blue', 'green', 'yellow', 'pink', 'purple', 'gray', 'brown']
   },
   {
     key: 'price',
@@ -152,14 +155,14 @@ const selectedFilters = ref({
   availability: [],
   category: [],
   colors: [],
-  price: { min: 0, max: 500 },
+  price: null,
   collection: [],
   tags: [],
   ratings: null
 })
 
-const filterKeys = categories.filter(c => c.type === 'checkboxes' || c.type === 'buttons').map(c => c.key)
-console.log(filterKeys);
+const filterKeys = categories.filter(c => c.type === 'checkboxes' || c.type === 'buttons' || c.type === 'color-picker').map(c => c.key)
+
 
 
 
@@ -167,6 +170,7 @@ const filteredProducts = computed(() => {
   let list = products.value
 
   for (let key of filterKeys) {
+
     let selectedArr = selectedFilters.value[key]
     if (!selectedArr.length) continue
     list = list.filter(p => {
@@ -174,6 +178,7 @@ const filteredProducts = computed(() => {
         return selectedArr.includes(String(p[key])) || selectedArr.includes(p[key])
 
       }
+
 
       if (Array.isArray(p[key])) {
         return p[key].some(item => selectedArr.includes(item))
@@ -191,6 +196,12 @@ const filteredProducts = computed(() => {
 
   }
 
+
+
+  const maxPrice = selectedFilters.value.price
+  if (maxPrice) {
+    list = list.filter(p => Number(p.price) < Number(maxPrice))
+  }
   return list
 
 
