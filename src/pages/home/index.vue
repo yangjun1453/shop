@@ -35,7 +35,7 @@
                     <h2 class="text-5xl">NEW </h2>
                     <h2 class="  text-6xl font-black 
   text-transparent bg-clip-text bg-gradient-to-r from-purple-500 to-pink-500
-  drop-shadow-lg">Mariel es una belleza</h2>
+  drop-shadow-lg">COLLECTION</h2>
                     <div>
                         <p>
                             Summer
