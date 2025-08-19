@@ -16,7 +16,7 @@
             <p>${{ product.price }}</p>
             <div class="flex gap-2">
                 <button v-for="size in product.size" class="btn btn-xs sm:btn-sm  md:btn-md lg:btn-lg xl:btn-xl">{{ size
-                }}</button>
+                    }}</button>
             </div>
 
             <div class="flex gap-2">
@@ -33,7 +33,7 @@
 
                 </div>
             </div>
-            <button class="btn  btn-primary">Add</button>
+            <button class="btn  btn-primary">Add to Cart</button>
         </div>
 
     </div>

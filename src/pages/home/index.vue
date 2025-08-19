@@ -9,7 +9,7 @@
             </ul>
 
         </div>
-        <div class="mt-4">
+        <div class="mt-4 ">
 
             <fieldset class="w-full space-y-1 text-gray-800">
                 <label for="Search" class="hidden">Search</label>
@@ -24,7 +24,7 @@
                         </button>
                     </span>
                     <input type="search" name="Search" placeholder="Search..."
-                        class="w-32 py-2 pl-10 text-sm rounded-md sm:w-auto focus:outline-none bg-gray-100 text-gray-800 focus:bg-gray-50 focus:border-emerald-600">
+                        class="w-32 py-2 pl-10 text-sm  sm:w-auto focus:outline-none bg-gray-100 text-gray-800 focus:bg-gray-50 focus:border-emerald-600 rounded-3xl">
                 </div>
             </fieldset>
         </div>
@@ -32,8 +32,10 @@
 
             <div class="flex flex-col justify-between">
                 <div>
-                    <h2 class="text-5xl">NEW COLLECTION</h2>
-
+                    <h2 class="text-5xl">NEW </h2>
+                    <h2 class="  text-6xl font-black 
+  text-transparent bg-clip-text bg-gradient-to-r from-purple-500 to-pink-500
+  drop-shadow-lg">Mariel es una belleza</h2>
                     <div>
                         <p>
                             Summer
@@ -42,16 +44,18 @@
                         <p>2025</p>
                     </div>
                 </div>
-                <p @click="toProducts">Go to Shop ----></p>
+                <p @click="toProducts" class=" bg-[#D9D9D9] p-4 hover:bg-[#f1f3f5] cursor-pointer rounded-3xl">Go to
+                    Shop ----></p>
             </div>
 
             <div class="flex gap-8 ">
                 <!-- 图片 -->
 
 
-                <img src="/img/cezar-sampaio-MpaWO-UOcV0-unsplash.jpg" alt=" " class=" object-cover w-100 h-90">
-                <img src="/img/sindy-sussengut-SVTBVz8mcOY-unsplash.jpg" alt=""
-                    class="w-100 object-cover h-90  object-[50%_90%]">
+                <img src="/img/cezar-sampaio-MpaWO-UOcV0-unsplash.jpg" alt=" "
+                    class=" object-cover w-100 h-90  rounded-3xl ">
+                <img src="/img/rishabh-dharmani-qXejYBGqP7Q-unsplash.jpg" alt=""
+                    class="w-100 object-cover h-90  object-[50%_30%] rounded-3xl">
             </div>
 
 
